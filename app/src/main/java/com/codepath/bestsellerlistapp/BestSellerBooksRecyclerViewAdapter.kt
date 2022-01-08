@@ -30,6 +30,10 @@ class BestSellerBooksRecyclerViewAdapter(
         holder.mItem = books[position]
         holder.mBookTitle.text = books[position].title
         holder.mBookAuthor.text = books[position].author
+        holder.mRanking.text = books[position].rank.toString()
+        holder.mBookDescription.text=books[position].description
+        holder.mBuy.text = "BUY"
+
         holder.mView.setOnClickListener {
             holder.mItem?.let { book ->
                 mListener?.onItemClick(book)
@@ -44,10 +48,13 @@ class BestSellerBooksRecyclerViewAdapter(
     inner class BookViewHolder(val mView: View) : ViewHolder(mView) {
         val mBookTitle: TextView = mView.findViewById<View>(id.book_title) as TextView
         val mBookAuthor: TextView = mView.findViewById<View>(id.book_author) as TextView
+        val mRanking: TextView = mView.findViewById<View>(id.ranking) as TextView
+        val mBookDescription: TextView = mView.findViewById<View>(id.book_description) as TextView
+        val mBuy: TextView = mView.findViewById<View>(id.buy_button) as TextView
         var mItem: BestSellerBook? = null
 
         override fun toString(): String {
-            return mBookTitle.toString() + " '" + mBookAuthor.text + "'"
+            return mBookTitle.toString() + " '" + mBookAuthor.text + "'" + mRanking.text + "'" + mBookDescription.text
         }
     }
 }

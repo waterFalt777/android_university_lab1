@@ -1,8 +1,10 @@
 package com.codepath.bestsellerlistapp
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
@@ -10,7 +12,17 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.codepath.bestsellerlistapp.BestSellerBooksRecyclerViewAdapter.BookViewHolder
 import com.codepath.bestsellerlistapp.R.id
 import com.codepath.bestsellerlistapp.R.layout
+//import com.codepath.bestsellerlistapp.models.BestSellerBook
+import com.bumptech.glide.Glide
+
+//import com.codepath.bestsellerlistapp.models.BestSellerBook
 import com.codepath.bestsellerlistapp.models.BestSellerBook
+
+
+
+
+
+
 
 /**
  * [RecyclerView.Adapter] that can display a [BestSellerBook] and makes a call to the
@@ -32,7 +44,17 @@ class BestSellerBooksRecyclerViewAdapter(
         holder.mBookAuthor.text = books[position].author
         holder.mRanking.text = books[position].rank.toString()
         holder.mBookDescription.text=books[position].description
+        //holder.mBookImage = (books[position].bookImageUrl)
         holder.mBuy.text = "BUY"
+
+        //BOOK IMAGE 2. Use Glide.with() as seen from the lab tbshoot example
+        //3. Make MyAppGlideMod to extend from Glide Mod
+
+        var bestSellerBook = books[position]
+        Glide.with(holder.mView)
+            .load(bestSellerBook.bookImageUrl)
+            .centerInside()
+            .into(holder.mBookImage)
 
         holder.mView.setOnClickListener {
             holder.mItem?.let { book ->
@@ -50,11 +72,15 @@ class BestSellerBooksRecyclerViewAdapter(
         val mBookAuthor: TextView = mView.findViewById<View>(id.book_author) as TextView
         val mRanking: TextView = mView.findViewById<View>(id.ranking) as TextView
         val mBookDescription: TextView = mView.findViewById<View>(id.book_description) as TextView
+        val mBookImage: ImageView = mView.findViewById<View>(id.book_image) as ImageView
         val mBuy: TextView = mView.findViewById<View>(id.buy_button) as TextView
         var mItem: BestSellerBook? = null
+
 
         override fun toString(): String {
             return mBookTitle.toString() + " '" + mBookAuthor.text + "'" + mRanking.text + "'" + mBookDescription.text
         }
+
+
     }
 }

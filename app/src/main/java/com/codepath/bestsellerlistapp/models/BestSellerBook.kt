@@ -25,4 +25,6 @@ class BestSellerBook {
 
     @SerializedName("amazon_product_url")
     var amazonUrl: String? = null
+
+    //make a bookImageUrl to Render Image in the Adapter?
 }
